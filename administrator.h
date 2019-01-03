@@ -1,5 +1,5 @@
-#ifndef ADMINISTRATOR_H
-#include ADMINISTRATOR_H
+#ifndef ADMINISTRATOR_H_INCLUDED
+#define ADMINISTRATOR_H_INCLUDED
 
 #include <iostream>
 #include "angajat.h"
@@ -14,15 +14,15 @@ class administrator : virtual public angajat<T>
 protected:
     int sectie;
 public:
-    administrator() : angajat()
+    administrator() : angajat<T>()
     {
         sectie = -1;
     }
-    administrator(char* n , T sal, int sec) : angajat(n, sal)
+    administrator(char* n , T sal, int sec) : angajat<T>(n, sal)
     {
         sectie = sec;
     }
-    administrator(administrator <T> &obiect) : angajat (obiect)
+    administrator(administrator <T> &obiect) : angajat<T>(obiect)
     {
         sectie = obiect.sectie;
     }
@@ -34,18 +34,23 @@ public:
     template <class U>
     friend istream& operator >> (istream& in, administrator <U> &obiect)
     {
-        in >> *(dynamic_cast<angajat*>(&obiect));
-        in >> obiect.sectie;
+        char *n = new char[100];
+        in>>n;
+        obiect.nume = n;
+        in>>obiect.salariu;
+        in>>obiect.sectie;
+
+        return in;
     }
 
     template <class U>
     friend ostream& operator << (ostream& out, administrator <U> &obiect)
     {
-        out << *(dynamic_cast<angajat*>(&obiect));
+        out << (*(dynamic_cast<angajat<T>*>(&obiect)));
         out << " ";
         out << obiect.sectie;
         out << "\n";
     }
 };
 
-#endif // ADMINISTRATOR_H
+#endif // ADMINISTRATOR_H_INCLUDED
