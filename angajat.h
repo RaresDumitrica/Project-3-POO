@@ -7,6 +7,8 @@
 
 using namespace std;
 
+template <class T> class administrator;
+
 template <class T>
 class angajat
 {
@@ -91,7 +93,7 @@ public:
         return *this;
     }
 
-    virtual void afisare ()
+    virtual void afisare()
     {
         cout << nume;
         cout << salariu;
