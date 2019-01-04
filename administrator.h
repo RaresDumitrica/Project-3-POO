@@ -34,10 +34,8 @@ public:
     template <class U>
     friend istream& operator >> (istream& in, administrator <U> &obiect)
     {
-        char *n = new char[100];
-        in>>n;
-        obiect.nume = n;
-        in>>obiect.salariu;
+        in>>(*(dynamic_cast<angajat<T>*>(&obiect)));
+        cout<< "\n sectia angajatului: ";
         in>>obiect.sectie;
 
         return in;
@@ -47,10 +45,15 @@ public:
     friend ostream& operator << (ostream& out, administrator <U> &obiect)
     {
         out << (*(dynamic_cast<angajat<T>*>(&obiect)));
-        out << " ";
-        out << obiect.sectie;
+        out <<", sectia: "<< obiect.sectie;
         out << "\n";
     }
+
+    //  Bunicu::afisare();
+    //cout<<"TheBeatles\n"
+     //afisare()
+
+
 };
 
 #endif // ADMINISTRATOR_H_INCLUDED
