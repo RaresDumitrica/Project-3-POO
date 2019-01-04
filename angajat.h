@@ -7,7 +7,7 @@
 
 using namespace std;
 
-template <class T> class administrator;
+//template <class T> class administrator;
 
 template <class T>
 class angajat
@@ -53,23 +53,25 @@ public:
     }
 
 
-    template <class U>
-    friend istream& operator>> (istream &in, angajat <U> &obiect)
+
+    friend istream& operator>> (istream &in, angajat <T> &obiect)
     {
-        char *n = new char[100];
+        cout<<"Numele anagajatului: ";
+        char* n = new char[100];
         in>>n;
         obiect.nume = n;
+        cout << "\n salariul angajatului: ";
         in>>obiect.salariu;
 
         return in;
     }
 
-    template <class U>
-    friend ostream& operator<< (ostream &out, angajat <U> &obiect)
+
+    friend ostream& operator<< (ostream &out, angajat <T> &obiect)
     {
-        out << obiect.nume;
+        out << "Nume: " << obiect.nume << ", ";
         out << " ";
-        out << obiect.salariu;
+        out <<"salariu: "<< obiect.salariu;
 
         return out;
     }
@@ -101,7 +103,4 @@ public:
 
 };
 
-
-
 #endif // ANGAJAT_H
-
